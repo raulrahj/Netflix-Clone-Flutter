@@ -1,55 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/api/api_end_points.dart';
+import 'package:netflix/api/http_services/request.dart';
+import 'package:netflix/core/constants/spacing.dart';
 
 class FastLaugh extends StatelessWidget {
-  const FastLaugh({ Key? key }) : super(key: key);
+  const FastLaugh({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: PageView(
-        scrollDirection: Axis.vertical,
-        children: List.generate(10, (index) => ListofVedios(index: index,),)
-      )),
+      body: SafeArea(
+        child: PageView(
+          scrollDirection: Axis.vertical,
+          children: List.generate(
+            10,
+            (index) => FutureBuilder(
+                future: HttpServices().getTrending(ApiEndPoints.trending),
+                builder: (context, AsyncSnapshot snapshot) {
+                  return snapshot.hasData
+                      ? ListofVedios(
+                          index: index,
+                          image: snapshot.data[index].posterPath,
+                        )
+                      : const Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                }),
+          ),
+        ),
+      ),
     );
   }
 }
 
 class ListofVedios extends StatelessWidget {
+  final String image;
   final index;
-  const ListofVedios({ Key? key,required this.index }) : super(key: key);
+  const ListofVedios({Key? key, required this.index, required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          color: Colors.accents[index%Colors.accents.length],
-          
+          height: displayHeight(context),
+          width: double.infinity,
+          child: Image(
+            image: NetworkImage(
+              ApiEndPoints.img + image,
+            ),
+            fit: BoxFit.cover,
+          ),
+          // color: Colors.accents[index % Colors.accents.length],
         ),
         Align(
-          alignment: Alignment.bottomCenter,
-          child: Row(children: [IconButton(onPressed: (){}, icon: Icon(Icons.volume_mute_sharp))],)),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80'),),
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {}, icon:const Icon(Icons.volume_off_sharp))
+              ],
+            )),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundImage: NetworkImage(ApiEndPoints.img + image),
                   ),
-                  ActionButtons(icon: Icons.emoji_emotions, label: 'LOL'),
-                  ActionButtons(icon: Icons.add, label: 'My List'),
-                  ActionButtons(icon: Icons.telegram_outlined,label: 'Share'),
-                  ActionButtons(icon: Icons.play_arrow, label: 'Play'),
-                ],
-              ),
+                ),
+                ActionButtons(icon: Icons.emoji_emotions, label: 'LOL'),
+                ActionButtons(icon: Icons.add, label: 'My List'),
+                ActionButtons(icon: Icons.telegram_outlined, label: 'Share'),
+                ActionButtons(icon: Icons.play_arrow, label: 'Play'),
+              ],
             ),
-          )
+          ),
+        )
       ],
     );
   }
@@ -58,7 +99,8 @@ class ListofVedios extends StatelessWidget {
 class ActionButtons extends StatelessWidget {
   IconData icon;
   String label;
-   ActionButtons({ Key? key,required this.icon,required this.label }) : super(key: key);
+  ActionButtons({Key? key, required this.icon, required this.label})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +108,10 @@ class ActionButtons extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Icon(icon,size: 40,),
+          Icon(
+            icon,
+            size: 40,
+          ),
           Text(label)
         ],
       ),

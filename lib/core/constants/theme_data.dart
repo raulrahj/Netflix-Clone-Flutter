@@ -9,7 +9,7 @@ ThemeData defaultDark = ThemeData(
       backgroundColor: Color(0XFF1F1F1F),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(primary: Colors.grey[100],)),
-    
+    textButtonTheme: TextButtonThemeData(style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.white)))
     
     
     
