@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/api/api_end_points.dart';
 import 'package:netflix/core/constants/spacing.dart';
 
 class DefaultCard extends StatelessWidget {
@@ -16,8 +17,7 @@ class DefaultCard extends StatelessWidget {
             height: displayHeight(context)*15,
             decoration: BoxDecoration(
               borderRadius: defaultRadius1 ,
-              color: Colors.red,
-              image: DecorationImage(image: NetworkImage("https://image.tmdb.org/t/p/w500/$image"),fit: BoxFit.cover)
+              image: DecorationImage(image: NetworkImage(ApiEndPoints.img+image! ?? test),fit: BoxFit.cover)
             ),
           ),
         );

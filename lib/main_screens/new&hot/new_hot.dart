@@ -5,6 +5,7 @@ import 'package:netflix/core/constants/spacing.dart';
 import 'package:netflix/core/constants/strings.dart';
 import 'package:netflix/main_screens/new&hot/tab_coming_soon.dart';
 import 'package:netflix/main_screens/new&hot/tab_watching.dart';
+import 'package:netflix/widgets/loading.dart';
 import 'package:shimmer/shimmer.dart';
 
 class NewHot extends StatelessWidget {
@@ -51,7 +52,7 @@ class NewHot extends StatelessWidget {
                         data: snapshot.data,
                       )
                     : const Shimmer(
-                        child: Text("Loading"), gradient: shimmerGradient);
+                        child: Loading(), gradient: shimmerGradient);
               }),
           FutureBuilder(
               future: HttpServices().getUpcoming(ApiEndPoints.trending),
@@ -61,7 +62,7 @@ class NewHot extends StatelessWidget {
                         data: snapshot.data,
                       )
                     : const Shimmer(
-                        child: Text('Loading'), gradient: shimmerGradient);
+                        child: Loading(), gradient: shimmerGradient);
               })
         ]),
       ),

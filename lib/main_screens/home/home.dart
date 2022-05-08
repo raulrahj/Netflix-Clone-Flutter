@@ -7,7 +7,12 @@ import 'package:netflix/core/constants/strings.dart';
 import 'package:netflix/main_screens/home/widgets/categories.dart';
 import 'package:netflix/main_screens/home/widgets/main_button.dart';
 import 'package:netflix/main_screens/home/widgets/number_card.dart';
+import 'package:netflix/main_screens/home/widgets/resume_card.dart';
+import 'package:netflix/main_screens/home/widgets/row_view.dart';
+import 'package:netflix/main_screens/home/widgets/top_ten_row_view.dart';
 import 'package:netflix/widgets/defaultcard.dart';
+import 'package:netflix/widgets/loading.dart';
+import 'package:netflix/widgets/row_loading.dart';
 import 'package:netflix/widgets/title_banner.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -61,14 +66,8 @@ class Home extends StatelessWidget {
                                           //   ),
                                           // ],
                                         ),
-                                        // child: Column(),
                                       )
-                                    : Shimmer(
-                                        child: Container(
-                                          height: displayHeight(context) * .6,
-                                          child: Text('Loading'),
-                                        ),
-                                        gradient: shimmerGradient);
+                                    : const Loading();
                               }),
                           Positioned(
                             bottom: 5,
@@ -116,39 +115,42 @@ class Home extends StatelessWidget {
                               HttpServices().getTrending(ApiEndPoints.trending),
                           builder: (context, AsyncSnapshot snapshot) {
                             return snapshot.hasData
-                                ? RegularView(
+                                ? ResumeView(
                                     image: snapshot.data,
                                     title: 'Continue Watching for Nivea C M',
+                                  )
+                                : const RowLoading();
+                          }),
+                      FutureBuilder(
+                          future:
+                              HttpServices().getTrending(ApiEndPoints.popular),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            return snapshot.hasData
+                                ? RegularView(
+                                    image: snapshot.data,
+                                    title: 'Popular on Netflix',
                                   )
                                 : Text(snapshot.error.toString());
                           }),
                       FutureBuilder(
-                        future: HttpServices().getTrending(ApiEndPoints.trending),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          return snapshot.hasData? RegularView(
-                            image:snapshot.data ,
-                            title: 'Popular on Netflix',
-                          ):Text(snapshot.error.toString());
-                        }
-                      ),
-                      FutureBuilder(
-                        future: HttpServices().getTrending(ApiEndPoints.trending),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          return snapshot.hasData? RegularView(
-                            image: snapshot.data,
-                            title: 'Trending Now',
-                          ):Text(snapshot.error.toString());
-                        }
-                      ),
-
-                      FutureBuilder(
                           future:
                               HttpServices().getTrending(ApiEndPoints.trending),
                           builder: (context, AsyncSnapshot snapshot) {
-                            print(snapshot.data);
+                            return snapshot.hasData
+                                ? RegularView(
+                                    image: snapshot.data,
+                                    title: 'Trending Now',
+                                  )
+                                : Text(snapshot.error.toString());
+                          }),
+
+                      FutureBuilder(
+                          future:
+                              HttpServices().getTrending(ApiEndPoints.topTen),
+                          builder: (context, AsyncSnapshot snapshot) {
                             return snapshot.hasData
                                 ? NumberView(
-                                  image: snapshot.data[0].posterPath,
+                                    image: snapshot.data[0].posterPath,
                                     images: snapshot.data,
                                     title: 'Top 10 in India Today',
                                   )
@@ -157,14 +159,16 @@ class Home extends StatelessWidget {
                                     gradient: shimmerGradient);
                           }),
                       FutureBuilder(
-                        future: HttpServices().getTrending(ApiEndPoints.trending),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          return snapshot.hasData? RegularView(
-                            image: snapshot.data,
-                            title: 'TV Shows Based on Books',
-                          ):Text(snapshot.error.toString());
-                        }
-                      ),
+                          future:
+                              HttpServices().getTrending(ApiEndPoints.upcoming),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            return snapshot.hasData
+                                ? RegularView(
+                                    image: snapshot.data,
+                                    title: 'TV Shows Based on Books',
+                                  )
+                                : Text(snapshot.error.toString());
+                          }),
                     ],
                   ),
                   scrollNotifier.value == true
@@ -245,10 +249,6 @@ class Home extends StatelessWidget {
                                                   isCategory: true));
                                     },
                                   )
-                                  // DropdownButton(
-                                  //   items: []
-
-                                  // , onChanged: (value){})
                                 ],
                               )
                             ],
@@ -263,55 +263,3 @@ class Home extends StatelessWidget {
   }
 }
 //____________________________
-
-class RegularView extends StatelessWidget {
-  String? title;
-  dynamic image;
-  RegularView({Key? key, this.title, this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        TitleBanner(title: title),
-        LimitedBox(
-          maxHeight: 200,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(10, (index) => DefaultCard(image: image[index+10].posterPath,)),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class NumberView extends StatelessWidget {
-  String? title;
-  dynamic images;
-  String? image;
-  NumberView({Key? key, this.title, this.images, this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        TitleBanner(title: title),
-        LimitedBox(
-          maxHeight: 200,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-                10,
-                (index) => NumberCard(
-                      position: index + 1,
-                      image: images[index].posterPath,
-                    )),
-          ),
-        )
-      ],
-    );
-  }
-}

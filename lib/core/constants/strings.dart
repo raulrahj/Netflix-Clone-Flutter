@@ -44,9 +44,9 @@ const dBaseUrl ='https://api.themoviedb.org/3';
 
   const shimmerGradient = LinearGradient(
   colors: [
-    Color(0xFFEBEBF4),
-    Color(0xFFF4F4F4),
-    Color(0xFFEBEBF4),
+    Color.fromARGB(255, 160, 160, 160),
+    Color.fromARGB(255, 98, 98, 98),
+    Color.fromARGB(255, 56, 56, 56),
   ],
   stops: [
     0.1,

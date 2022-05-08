@@ -94,7 +94,7 @@ class TabOneTile extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    'Season 1 Coming Friday',
+                    'Coming Soon...s',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   RichText(
