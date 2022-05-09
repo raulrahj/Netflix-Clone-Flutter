@@ -5,7 +5,13 @@ class HomeButton extends StatelessWidget {
   final String text;
   final double size;
   final double fontsize;
-  const HomeButton({Key? key, this.icon, required this.text,this.size=22,this.fontsize=11}) : super(key: key);
+  const HomeButton(
+      {Key? key,
+      this.icon,
+      required this.text,
+      this.size = 22,
+      this.fontsize = 11})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +19,15 @@ class HomeButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(icon,size: size ,),
-        Text(text, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize:fontsize ))
+        Icon(
+          icon,
+          size: size,
+        ),
+        Text(text,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(fontSize: fontsize))
       ],
     );
   }

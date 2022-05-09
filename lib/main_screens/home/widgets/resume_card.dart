@@ -24,12 +24,12 @@ class ResumeCard extends StatelessWidget {
                       fit: BoxFit.cover)),
             ),
           ),
-        // const  Align(
-        //       alignment: Alignment.centerRight,
-        //       child: Icon(
-        //         Icons.play_circle_rounded,
-        //         size: 50,
-        //       ))
+          // const  Align(
+          //       alignment: Alignment.centerRight,
+          //       child: Icon(
+          //         Icons.play_circle_rounded,
+          //         size: 50,
+          //       ))
         ],
       ),
     );
@@ -39,7 +39,7 @@ class ResumeCard extends StatelessWidget {
 class ResumeView extends StatelessWidget {
   String title;
   dynamic image;
-  ResumeView({Key? key,required this.title, this.image}) : super(key: key);
+  ResumeView({Key? key, required this.title, this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

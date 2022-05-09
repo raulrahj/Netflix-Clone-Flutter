@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:netflix/widgets/defaultcard.dart';
 import 'package:netflix/widgets/title_banner.dart';
@@ -6,7 +5,7 @@ import 'package:netflix/widgets/title_banner.dart';
 class RegularView extends StatelessWidget {
   String title;
   dynamic image;
-  RegularView({Key? key,required this.title, this.image}) : super(key: key);
+  RegularView({Key? key, required this.title, this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

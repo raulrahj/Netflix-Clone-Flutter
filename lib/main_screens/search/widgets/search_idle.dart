@@ -28,12 +28,12 @@ class SearchIdle extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: ((context, index) {
                           return SearchTileIdle(
-                            image: snapshot.data[index + 5].backImage,
-                            title: snapshot.data[index + 5].title,
+                            image: snapshot.data[index].backImage,
+                            title: snapshot.data[index].title,
                           );
                         }),
-                        separatorBuilder: ((context, index) =>const Divider()),
-                        itemCount: 5)
+                        separatorBuilder: ((context, index) => const Divider()),
+                        itemCount: 2)
                     : const Loading();
               }),
         ),

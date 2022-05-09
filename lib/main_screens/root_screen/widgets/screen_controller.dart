@@ -9,7 +9,7 @@ import 'package:netflix/main_screens/search/search.dart';
 class ScreenController extends StatelessWidget {
   ScreenController({Key? key}) : super(key: key);
 
-  final _screens = [Home(), NewHot(), FastLaugh(),Search(), Downloads()];
+  final _screens = [Home(), NewHot(), FastLaugh(), Search(), Downloads()];
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class ScreenController extends StatelessWidget {
               return _screens[newIndexListener];
             }),
       ),
-      bottomNavigationBar:const BottomNav(),
-      
+      bottomNavigationBar: const BottomNav(),
     );
   }
 }

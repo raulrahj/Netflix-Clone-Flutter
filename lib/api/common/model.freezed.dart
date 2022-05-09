@@ -12,11 +12,38 @@ part of 'model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ApiCommon _$ApiCommonFromJson(Map<String, dynamic> json) {
   return _ApiCommon.fromJson(json);
 }
+
+/// @nodoc
+class _$ApiCommonTearOff {
+  const _$ApiCommonTearOff();
+
+  _ApiCommon call(
+      {@JsonKey(name: "poster_path") required String? image,
+      @JsonKey(name: "backdrop_path") required String? backImage,
+      @JsonKey(name: "original_title") required String? title,
+      @JsonKey(name: "media_type") required String? type,
+      @JsonKey(name: "overview") required String? overView}) {
+    return _ApiCommon(
+      image: image,
+      backImage: backImage,
+      title: title,
+      type: type,
+      overView: overView,
+    );
+  }
+
+  ApiCommon fromJson(Map<String, Object?> json) {
+    return ApiCommon.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ApiCommon = _$ApiCommonTearOff();
 
 /// @nodoc
 mixin _$ApiCommon {
@@ -192,7 +219,6 @@ class _$_ApiCommon implements _ApiCommon {
             const DeepCollectionEquality().equals(other.overView, overView));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -215,31 +241,30 @@ class _$_ApiCommon implements _ApiCommon {
 
 abstract class _ApiCommon implements ApiCommon {
   const factory _ApiCommon(
-          {@JsonKey(name: "poster_path") required final String? image,
-          @JsonKey(name: "backdrop_path") required final String? backImage,
-          @JsonKey(name: "original_title") required final String? title,
-          @JsonKey(name: "media_type") required final String? type,
-          @JsonKey(name: "overview") required final String? overView}) =
-      _$_ApiCommon;
+      {@JsonKey(name: "poster_path") required String? image,
+      @JsonKey(name: "backdrop_path") required String? backImage,
+      @JsonKey(name: "original_title") required String? title,
+      @JsonKey(name: "media_type") required String? type,
+      @JsonKey(name: "overview") required String? overView}) = _$_ApiCommon;
 
   factory _ApiCommon.fromJson(Map<String, dynamic> json) =
       _$_ApiCommon.fromJson;
 
   @override
   @JsonKey(name: "poster_path")
-  String? get image => throw _privateConstructorUsedError;
+  String? get image;
   @override
   @JsonKey(name: "backdrop_path")
-  String? get backImage => throw _privateConstructorUsedError;
+  String? get backImage;
   @override
   @JsonKey(name: "original_title")
-  String? get title => throw _privateConstructorUsedError;
+  String? get title;
   @override
   @JsonKey(name: "media_type")
-  String? get type => throw _privateConstructorUsedError;
+  String? get type;
   @override
   @JsonKey(name: "overview")
-  String? get overView => throw _privateConstructorUsedError;
+  String? get overView;
   @override
   @JsonKey(ignore: true)
   _$ApiCommonCopyWith<_ApiCommon> get copyWith =>
