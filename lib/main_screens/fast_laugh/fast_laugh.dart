@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:netflix/api/api_end_points.dart';
 import 'package:netflix/api/http_services/request.dart';
 import 'package:netflix/core/constants/spacing.dart';
+import 'package:netflix/main_screens/fast_laugh/widgets/button.dart';
+import 'package:netflix/widgets/loading.dart';
 
 class FastLaugh extends StatelessWidget {
   const FastLaugh({Key? key}) : super(key: key);
@@ -22,16 +24,7 @@ class FastLaugh extends StatelessWidget {
                           index: index,
                           image: snapshot.data[index].posterPath,
                         )
-                      : const Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                              backgroundColor: Colors.grey,
-                              color: Colors.white,
-                            ),
-                          ),
-                        );
+                      : const Loading();
                 }),
           ),
         ),
@@ -42,7 +35,7 @@ class FastLaugh extends StatelessWidget {
 
 class ListofVedios extends StatelessWidget {
   final String image;
-  final index;
+  final int index;
   const ListofVedios({Key? key, required this.index, required this.image})
       : super(key: key);
 
@@ -50,7 +43,7 @@ class ListofVedios extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: displayHeight(context),
           width: double.infinity,
           child: Image(
@@ -59,16 +52,16 @@ class ListofVedios extends StatelessWidget {
             ),
             fit: BoxFit.cover,
           ),
-          // color: Colors.accents[index % Colors.accents.length],
         ),
         Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {}, icon:const Icon(Icons.volume_off_sharp))
-              ],
-            )),
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.volume_off_sharp))
+            ],
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Align(
@@ -92,29 +85,6 @@ class ListofVedios extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class ActionButtons extends StatelessWidget {
-  IconData icon;
-  String label;
-  ActionButtons({Key? key, required this.icon, required this.label})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 40,
-          ),
-          Text(label)
-        ],
-      ),
     );
   }
 }

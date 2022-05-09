@@ -24,8 +24,9 @@ class HttpServices {
     if (res.statusCode == 200) {
       final decodedJson = jsonDecode(res.body);
 
-      List<dynamic> list =
-          decodedJson['results'].map((item) => ApiCommon.fromJson(item)).toList();
+      List<dynamic> list = decodedJson['results']
+          .map((item) => ApiCommon.fromJson(item))
+          .toList();
       return list;
     } else {
       throw 'Couldn\t get list';
@@ -33,15 +34,15 @@ class HttpServices {
   }
 }
 
-  Future<List<dynamic>> getPopular(String data) async {
-    Response res = await get(Uri.parse(data));
-    if (res.statusCode == 200) {
-      final decodedJson = jsonDecode(res.body);
+Future<List<dynamic>> getPopular(String data) async {
+  Response res = await get(Uri.parse(data));
+  if (res.statusCode == 200) {
+    final decodedJson = jsonDecode(res.body);
 
-      List<dynamic> list =
-          decodedJson['results'].map((item) => ApiCommon.fromJson(item)).toList();
-      return list;
-    } else {
-      throw 'Couldn\t get list';
-    }
+    List<dynamic> list =
+        decodedJson['results'].map((item) => ApiCommon.fromJson(item)).toList();
+    return list;
+  } else {
+    throw 'Couldn\t get list';
   }
+}

@@ -12,11 +12,30 @@ part of 'model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ApiDownloads _$ApiDownloadsFromJson(Map<String, dynamic> json) {
   return _ApiDownloads.fromJson(json);
 }
+
+/// @nodoc
+class _$ApiDownloadsTearOff {
+  const _$ApiDownloadsTearOff();
+
+  _ApiDownloads call(
+      {@JsonKey(name: "poster_path") required String posterPath}) {
+    return _ApiDownloads(
+      posterPath: posterPath,
+    );
+  }
+
+  ApiDownloads fromJson(Map<String, Object?> json) {
+    return ApiDownloads.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ApiDownloads = _$ApiDownloadsTearOff();
 
 /// @nodoc
 mixin _$ApiDownloads {
@@ -118,7 +137,6 @@ class _$_ApiDownloads implements _ApiDownloads {
                 .equals(other.posterPath, posterPath));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(posterPath));
@@ -136,7 +154,7 @@ class _$_ApiDownloads implements _ApiDownloads {
 
 abstract class _ApiDownloads implements ApiDownloads {
   const factory _ApiDownloads(
-          {@JsonKey(name: "poster_path") required final String posterPath}) =
+          {@JsonKey(name: "poster_path") required String posterPath}) =
       _$_ApiDownloads;
 
   factory _ApiDownloads.fromJson(Map<String, dynamic> json) =
@@ -144,7 +162,7 @@ abstract class _ApiDownloads implements ApiDownloads {
 
   @override
   @JsonKey(name: "poster_path")
-  String get posterPath => throw _privateConstructorUsedError;
+  String get posterPath;
   @override
   @JsonKey(ignore: true)
   _$ApiDownloadsCopyWith<_ApiDownloads> get copyWith =>

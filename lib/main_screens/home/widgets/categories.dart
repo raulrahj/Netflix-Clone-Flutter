@@ -28,7 +28,6 @@ class CategoriesList extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-             
                 children: [
                   ListView.builder(
                     physics: const BouncingScrollPhysics(),
@@ -52,7 +51,7 @@ class CategoriesList extends StatelessWidget {
                       );
                     },
                   ),
-                 addVerticalSpace(100.0),
+                  addVerticalSpace(100.0),
                 ],
               ),
             ),
@@ -77,5 +76,4 @@ class CategoriesList extends StatelessWidget {
       ),
     );
   }
-
 }

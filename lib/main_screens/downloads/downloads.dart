@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:netflix/api/api_end_points.dart';
 import 'package:netflix/api/http_services/request.dart';
 import 'package:netflix/core/constants/spacing.dart';
 import 'package:netflix/widgets/custom_appbar.dart';
@@ -36,16 +37,15 @@ class Downloads extends StatelessWidget {
                 Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 22),
             textAlign: TextAlign.center,
           ),
+          addVerticalSpace(6.0),
           Text(
-            'We ll download a personalized selection of movies ad shows for you, so there s always something to watch on your phone.',
+            'We ll download a personalized selection of\n movies ad shows for you, so there s always\n something to watch on your phone.',
             style: Theme.of(context).textTheme.bodySmall,
             textAlign: TextAlign.center,
           ),
           FutureBuilder(
-              future: HttpServices().getTrending(
-                  "https://api.themoviedb.org/3/trending/all/day?api_key=b6feeb28b2559dccfecfb79215695a4b"),
+              future: HttpServices().getTrending(ApiEndPoints.trending),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                print(snapshot.data);
                 return snapshot.hasData
                     ? Container(
                         width: displayWidth(context),
@@ -54,7 +54,7 @@ class Downloads extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.grey,
+                              backgroundColor: Colors.grey.shade600,
                               radius: displayWidth(context) * .31,
                             ),
                             CircularWidget(
@@ -86,16 +86,20 @@ class Downloads extends StatelessWidget {
                         width: 200.0,
                         height: 200.0,
                         child: Shimmer.fromColors(
-                            baseColor: Colors.red,
-                            highlightColor: Colors.yellow,
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              child: Text('loading'),
-                              alignment: Alignment.center,
+                            baseColor: Colors.grey.shade800,
+                            highlightColor: Colors.black,
+                            child: Center(
+                              child: Container(
+                                width: double.infinity,
+                                height: displayWidth(context) * .9,
+                                child: CircleAvatar(
+                                  radius: displayWidth(context) * .31,
+                                  backgroundColor: Colors.grey,
+                                ),
+                                alignment: Alignment.center,
+                              ),
                             )),
                       );
-                ;
               }),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),

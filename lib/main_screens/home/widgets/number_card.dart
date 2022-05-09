@@ -1,4 +1,3 @@
-
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,7 +6,7 @@ import 'package:netflix/core/constants/spacing.dart';
 class NumberCard extends StatelessWidget {
   final int? position;
   final String? image;
-  const NumberCard({Key? key, this.position,this.image}) : super(key: key);
+  const NumberCard({Key? key, this.position, this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,9 @@ class NumberCard extends StatelessWidget {
                 borderRadius: defaultRadius1,
                 color: Colors.red,
                 image: DecorationImage(
-                    image: NetworkImage("https://image.tmdb.org/t/p/w500/$image"), fit: BoxFit.cover)),
+                    image:
+                        NetworkImage("https://image.tmdb.org/t/p/w500/$image"),
+                    fit: BoxFit.cover)),
           ),
         ),
         Align(
