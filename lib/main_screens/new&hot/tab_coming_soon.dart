@@ -10,7 +10,7 @@ class TabComingSoon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: List.generate(
-          10,
+          6,
           (index) => TabOneTile(
                 image: data[index].backImage,
                 title: data[index].title,

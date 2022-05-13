@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,9 +23,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       emit(_result.fold((f) => state.copyWith(isError: true, isLoading: false),
           (r) {
-        print('Before log printing');
-        log(r.results.toString());
-
         return state.copyWith(
             isError: false, isLoading: false, searchResultData: r.results);
       }));

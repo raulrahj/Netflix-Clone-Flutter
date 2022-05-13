@@ -77,9 +77,11 @@ class TabOneTile extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          title ?? 'Coming Soon',
-                          style: GoogleFonts.creepster().copyWith(fontSize: 22),
+                        Expanded(
+                          child: Text(
+                            title ?? 'Coming Soon',overflow:(title!.length > 7)? TextOverflow.ellipsis:TextOverflow.fade,
+                            style: GoogleFonts.creepster().copyWith(fontSize: 22),
+                          ),
                         ),
                         const Spacer(
                           flex: 1,
@@ -114,7 +116,7 @@ class TabOneTile extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: TitleBanner(title: title ?? "Mai: A Mother's Rage"),
+                    child: TitleBanner(title: title ?? "No Title"),
                   ),
                   Text(
                     overView ??

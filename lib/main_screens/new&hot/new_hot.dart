@@ -18,15 +18,9 @@ class NewHot extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('New & Hot'),
-          actions: [
-            const Icon(Icons.cast),
-            SizedBox(
-              child: Image(
-                image: NetworkImage(avatar),
-              ),
-              width: displayWidth(context) * .1,
-              height: displayHeight(context) * .025,
-            ),
+          actions:const [
+            Icon(Icons.cast),
+           Icon(Icons.square,color: Colors.blue,)
           ],
           bottom: TabBar(
               indicatorWeight: .2,

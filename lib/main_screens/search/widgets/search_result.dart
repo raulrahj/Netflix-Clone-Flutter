@@ -22,29 +22,22 @@ class SearchResult extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
-        Expanded(
-            child: BlocBuilder<SearchBloc, SearchState>(
-
-              builder: (context, state) {
-                return GridView.count(
-          childAspectRatio: (displayWidth(context) * .25 / 120),
-          shrinkWrap: true,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          crossAxisCount: 3,
-          children: List.generate(
-                  state.searchResultData.length,
-                  (index) {  
-                    final movie = state.searchResultData[index];
-                   return ResultCard(
-                                image:movie.posterPath! ,
-                              );
-                  }
-                   
-                      ),
-        );
-              }
-            ))
+        Expanded(child:
+            BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+          return GridView.count(
+            childAspectRatio: (displayWidth(context) * .25 / 120),
+            shrinkWrap: true,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            crossAxisCount: 3,
+            children: List.generate(state.searchResultData.length, (index) {
+              final movie = state.searchResultData[index];
+              return ResultCard(
+                image: movie.posterPath!,
+              );
+            }),
+          );
+        }))
       ],
     );
   }

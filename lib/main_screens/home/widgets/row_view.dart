@@ -10,12 +10,14 @@ class RegularView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         TitleBanner(title: title),
         LimitedBox(
           maxHeight: 200,
           child: ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: List.generate(
                 10,

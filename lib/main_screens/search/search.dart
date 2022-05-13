@@ -6,7 +6,6 @@ import 'package:netflix/domain/debounce/debounce.dart';
 import 'package:netflix/main_screens/search/widgets/search_idle.dart';
 import 'package:netflix/main_screens/search/widgets/search_result.dart';
 
-import '../../widgets/loading.dart';
 
 class Search extends StatelessWidget {
   Search({Key? key}) : super(key: key);
@@ -41,16 +40,13 @@ class Search extends StatelessWidget {
                 });
               },
             ),
-            Expanded(child: BlocBuilder<SearchBloc,SearchState>(builder: ((context, state) {
-               if (state.searchResultData.isEmpty) {
-                  print('printing on UI');
-                  print(state.searchResultData.toString());
-                  return const SearchIdle();
-                } else {
-                  print('printing on Ux ');
-                  print(state.searchResultData.toString());
-                  return const SearchResult();
-                }
+            Expanded(child: BlocBuilder<SearchBloc, SearchState>(
+                builder: ((context, state) {
+              if (state.searchResultData.isEmpty) {
+                return const SearchIdle();
+              } else {
+                return const SearchResult();
+              }
             })))
           ],
         ),

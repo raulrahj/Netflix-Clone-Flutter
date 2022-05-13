@@ -9,13 +9,14 @@ class TabWatching extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true,
       children: List.generate(
-          10,
+        5,
           (index) => TabOneTile(
-                image: data[index + 5].backImage,
-                title: data[index + 5].title,
-                overView: data[index + 5].overView,
-                type: data[index + 5].type,
+                image: data[index ].backImage,
+                title: data[index ].title,
+                overView: data[index ].overView,
+                type: data[index ].type,
                 actionbuttons: const [
                   HomeButton(
                     text: 'Share',

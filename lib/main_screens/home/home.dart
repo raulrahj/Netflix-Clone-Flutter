@@ -40,6 +40,7 @@ class Home extends StatelessWidget {
               child: Stack(
                 children: [
                   ListView(
+                    shrinkWrap: true,
                     children: [
                       Stack(
                         children: [
@@ -55,19 +56,11 @@ class Home extends StatelessWidget {
                                               image: NetworkImage(
                                                   "https://image.tmdb.org/t/p/w500/${snapshot.data[0].posterPath}"),
                                               fit: BoxFit.cover),
-                                          //                            boxShadow:const [
-                                          //    BoxShadow(
-                                          //     color: Colors.blue,
-                                          //   ),
-                                          //    BoxShadow(
-                                          //     color: Colors.blue,
-                                          //     spreadRadius: -12.0,
-                                          //     blurRadius: 55.0,
-                                          //   ),
-                                          // ],
                                         ),
                                       )
-                                    : const Loading();
+                                    : SizedBox(
+                                        height: displayHeight(context) * .6,
+                                        child: const Loading());
                               }),
                           Positioned(
                             bottom: 5,
@@ -130,7 +123,7 @@ class Home extends StatelessWidget {
                                     image: snapshot.data,
                                     title: 'Popular on Netflix',
                                   )
-                                : Text(snapshot.error.toString());
+                                : const RowLoading();
                           }),
                       FutureBuilder(
                           future:
@@ -141,7 +134,7 @@ class Home extends StatelessWidget {
                                     image: snapshot.data,
                                     title: 'Trending Now',
                                   )
-                                : Text(snapshot.error.toString());
+                                : const RowLoading();
                           }),
 
                       FutureBuilder(
@@ -154,9 +147,7 @@ class Home extends StatelessWidget {
                                     images: snapshot.data,
                                     title: 'Top 10 in India Today',
                                   )
-                                : Shimmer(
-                                    child: DefaultCard(),
-                                    gradient: shimmerGradient);
+                                : const RowLoading();
                           }),
                       FutureBuilder(
                           future:
@@ -167,7 +158,7 @@ class Home extends StatelessWidget {
                                     image: snapshot.data,
                                     title: 'TV Shows Based on Books',
                                   )
-                                : Text(snapshot.error.toString());
+                                : const RowLoading();
                           }),
                     ],
                   ),
@@ -234,13 +225,7 @@ class Home extends StatelessWidget {
                                       },
                                       child: const Text('Movies')),
                                   TextButton(
-                                    child: Wrap(
-                                      children: [
-                                        const Text('Categories'),
-                                        addHorizontalSpace(5.0),
-                                        const Icon(Icons.arrow_drop_down)
-                                      ],
-                                    ),
+                                    child: const Text('Categories'),
                                     onPressed: () {
                                       showDialog(
                                           context: context,
@@ -248,7 +233,9 @@ class Home extends StatelessWidget {
                                               const CategoriesList(
                                                   isCategory: true));
                                     },
-                                  )
+                                  ),
+                                  // addHorizontalSpace(5.0),
+                                  // const Icon(Icons.arrow_drop_down)
                                 ],
                               )
                             ],
